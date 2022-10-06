@@ -35,7 +35,7 @@ wss.on("connection", function(ws, request ) {
 function broadcast(message , url ) {
     connections.forEach(function (con, i) {
         if ( con.url == url ){
-            con.send(message);
+            con.socket.send(message);
         }
     });
 };
