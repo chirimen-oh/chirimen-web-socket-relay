@@ -12,8 +12,8 @@ const wss = new ws.Server({ server: httpServer });
 
 var connections = [];
 
-wss.on("connection", function(ws) {
-    console.log("Client connected");
+wss.on("connection", function(ws, request ) {
+    console.log("Client connected ws:,ws, " request:",request );
     connections.push(ws);
     
     ws.on('close', function () {
