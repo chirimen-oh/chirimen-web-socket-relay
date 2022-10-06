@@ -14,23 +14,29 @@ var connections = [];
 
 wss.on("connection", function(ws, request ) {
     console.log("Client connected request: origin:",request.headers.origin, " url:",request.url );
-    connections.push(ws);
+    connections.push({socket:ws, url:request.url});
     
     ws.on('close', function () {
         connections = connections.filter(function (conn, i) {
-            return (conn === ws) ? false : true;
+            var isTargetCon = (conn.socket === ws);
+            if ( isTargetCon ){
+                console.log("delete idx:",i, " url:",conn.url);
+            }
+            return (isTargetCon) ? false : true;
         });
     });
     
     ws.on('message', function (message) {
         console.log('message:', message);
-        broadcast(JSON.stringify(JSON.parse(message)));
+        broadcast(JSON.stringify(JSON.parse(message)), request.url );
     });
 });
     
-function broadcast(message) {
+function broadcast(message , url ) {
     connections.forEach(function (con, i) {
-        con.send(message);
+        if ( con.url == url ){
+            con.send(message);
+        }
     });
 };
 
