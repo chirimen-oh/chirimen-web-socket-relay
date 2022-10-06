@@ -28,7 +28,10 @@ wss.on("connection", function(ws, request ) {
     
     ws.on('message', function (message) {
 //        console.log('message:', message);
-        broadcast(JSON.stringify(JSON.parse(message)), request.url );
+        if ( message == "" || message == "ping" ){
+        } else {
+            broadcast(JSON.stringify(JSON.parse(message)), request.url );
+        }
     });
 });
     
