@@ -13,7 +13,7 @@ const wss = new ws.Server({ server: httpServer });
 var connections = [];
 
 wss.on("connection", function(ws, request ) {
-    console.log("Client connected ws:",ws, " request:",request );
+    console.log("Client connected request: origin:",request.origin, " url:",request.url );
     connections.push(ws);
     
     ws.on('close', function () {
