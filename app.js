@@ -19,15 +19,15 @@ wss.on("connection", function(ws, request ) {
     ws.on('close', function () {
         connections = connections.filter(function (conn, i) {
             var isTargetCon = (conn.socket === ws);
-            if ( isTargetCon ){
-                console.log("delete idx:",i, " url:",conn.url);
-            }
+//            if ( isTargetCon ){
+//                console.log("delete idx:",i, " url:",conn.url);
+//            }
             return (isTargetCon) ? false : true;
         });
     });
     
     ws.on('message', function (message) {
-        console.log('message:', message);
+//        console.log('message:', message);
         broadcast(JSON.stringify(JSON.parse(message)), request.url );
     });
 });
@@ -35,10 +35,10 @@ wss.on("connection", function(ws, request ) {
 function broadcast(message , url ) {
     connections.forEach(function (con, i) {
         if ( con.url == url ){
-            console.log("send:",con.url, " msg:",message);
+//            console.log("send:",con.url, " msg:",message);
             con.socket.send(message);
         } else {
-            console.log("skip send:",con.url);        
+//            console.log("skip send:",con.url);        
         }
     });
 };
