@@ -23,7 +23,10 @@ wss.on("connection",
                     x: msg.x,
                     y: msg.y
                 }
-                ws.send(JSON.stringify(resp));
+                wss.clients.forEach((client) => {
+                    client.send(JSON.stringify(resp));
+                }
+//                ws.send(JSON.stringify(resp));
             }
     });
 
