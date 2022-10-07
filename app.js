@@ -30,7 +30,11 @@ wss.on("connection", function(ws, request ) {
 //        console.log('message:', message);
         if ( message == "" || message == "ping" ){
         } else {
-            broadcast(JSON.stringify(JSON.parse(message)), request.url );
+            try{
+                broadcast(JSON.stringify(JSON.parse(message)), request.url );
+            } catch (e ){
+                // error skip
+            }
         }
     });
 });
