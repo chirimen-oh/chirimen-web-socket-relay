@@ -1,11 +1,12 @@
 var ws;
 var messageLog = "",
 	userName;
+const renderdomain = "onrender.com";
 const herokudomain = "herokuapp.com";
 onload = function () {
 	const output = document.getElementById("output");
 	output.innerHTML = "Wait for connection...";
-	if (location.host.indexOf(herokudomain) > 0) {
+	if (location.host.indexOf(herokudomain) > 0 || location.host.indexOf(renderdomain) > 0 ) {
 		wssHostURL.value = "wss://" + location.host + "/room1";
 	} else {
 	}
@@ -28,7 +29,7 @@ function connectHost() {
 			userNameInput.disabled = true;
 			wssHostURL.disabled = true;
 
-			if (wssUrl.indexOf(herokudomain) > 0) {
+			if (wssUrl.indexOf(herokudomain) > 0 || wssUrl.indexOf(renderdomain) > 0) {
 				// Deterring disconnections with Heroku timeout rules.
 				setTimeout(ping, 45 * 1000);
 			}
