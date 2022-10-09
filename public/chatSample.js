@@ -72,4 +72,7 @@ function sendMsg() {
 			user: userName,
 		})
 	);
+	console.log("sendMessage:",sendMsgTxt);
+	messageLog += `\n${userName}: ${new Date(msgTime).toLocaleTimeString()}>: ${sendMsgTxt}`;
+	messageBox.value = messageLog;
 }
