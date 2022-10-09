@@ -65,10 +65,11 @@ function checkEnter(e) {
 function sendMsg() {
 	var sendMsgTxt = messageInput.value.trim();
 	messageInput.value = "";
+	var msgTime = new Date().getTime()
 	ws.send(
 		JSON.stringify({
 			message: sendMsgTxt,
-			time: new Date().getTime(),
+			time: msgTime,
 			user: userName,
 		})
 	);
