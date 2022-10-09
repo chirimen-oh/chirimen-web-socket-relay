@@ -31,7 +31,7 @@ wss.on("connection", function(ws, request ) {
         if ( message == "" || message == "ping" ){
         } else {
             try{
-                broadcast(JSON.stringify(JSON.parse(message)), request.url );
+                broadcast(JSON.stringify(JSON.parse(message)), request.url, ws );
             } catch (e ){
                 // error skip
             }
@@ -39,9 +39,9 @@ wss.on("connection", function(ws, request ) {
     });
 });
     
-function broadcast(message , url ) {
+function broadcast(message, url, ws ) {
     connections.forEach(function (con, i) {
-        if ( con.url == url ){
+        if ( con.url == url && con.socket !== ws ){ // Send same channel(url) only. However, no echo back to the sender.
 //            console.log("send:",con.url, " msg:",message);
             con.socket.send(message);
         } else {
