@@ -1,0 +1,11 @@
+WebSocketを初めて使うので
+chirimem-web-socket-relay
+を参考にいろいろ改造してみる。
+
+npm install express
+node app.js
+これでとりあえず動くらしい。
+
+
+Thanks to
+https://github.com/satakagi .
